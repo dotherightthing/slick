@@ -69,6 +69,7 @@ Option | Type | Default | Description
 ------ | ---- | ------- | -----------
 accessibility | boolean | true | Enables tabbing and arrow key navigation
 adaptiveHeight | boolean | false | Adapts slider height to the current slide
+assistiveTechnology | boolean | false | Adds support for Assistive Technology like screen readers
 autoplay | boolean | false | Enables auto play of slides
 autoplaySpeed | int  | 3000 | Auto play change interval
 centerMode | boolean | false | Enables centered view with partial prev/next slides. Use with odd numbered slidesToShow counts.
