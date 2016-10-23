@@ -593,6 +593,7 @@
     };
 
     Slick.prototype.buildRows = function() {
+
         var _ = this, a, b, c, newSlides, numOfSlides, originalSlides,slidesPerSection;
 
         newSlides = document.createDocumentFragment();
