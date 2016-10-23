@@ -29,6 +29,33 @@
     'use strict';
     var Slick = window.Slick || {};
 
+    if ( _.options.siaCustomisations ) {
+
+        var getDataOptions = function(data) {
+            var options = {};
+            var lowercaseFirstLetter = function(string) {
+                return string.charAt(0).toLowerCase() + string.slice(1);
+            }
+
+            var parseOptions = function(optionKey, optionData) {
+                var options = {};
+
+                if(/^(slick)/gi.test(optionKey)) {
+                    var messageRule = optionKey.split('slick')[1];
+                    options[lowercaseFirstLetter(messageRule)] = optionData;
+                }
+
+                return options;
+            };
+
+            for(var key in data) {
+                options = $.extend(true, options, parseOptions(key, data[key]));
+            }
+
+            return options;
+        };
+    }
+
     Slick = (function() {
 
         var instanceUid = 0;
@@ -38,6 +65,7 @@
             var _ = this, dataSettings;
 
             _.defaults = {
+                siaCustomisations: false, // SIA modifications to 1.5.0
                 accessibility: true,
                 adaptiveHeight: false,
                 appendArrows: $(element),
@@ -141,7 +169,12 @@
             _.windowWidth = 0;
             _.windowTimer = null;
 
-            dataSettings = $(element).data('slick') || {};
+            if ( _.siaCustomisations === true ) {
+                dataSettings = $(element).data('slick') || getDataOptions($(element).data()) || {};
+            }
+            else {
+                dataSettings = $(element).data('slick') || {};
+            }
 
             _.options = $.extend({}, _.defaults, settings, dataSettings);
 
@@ -713,8 +746,16 @@
                 break;
 
             case 'index':
-                var index = event.data.index === 0 ? 0 :
-                    event.data.index || $target.index() * _.options.slidesToScroll;
+                if ( _.options.siaCustomisations === true) {
+                    var el = $(event.target).is('li') ? $(event.target) : $(event.target).parent();
+
+                    var index = event.data.index === 0 ? 0 :
+                        event.data.index || el.index() * _.options.slidesToScroll;
+                }
+                else {
+                    var index = event.data.index === 0 ? 0 :
+                        event.data.index || $target.index() * _.options.slidesToScroll;
+                }
 
                 _.slideHandler(_.checkNavigable(index), false, dontAnimate);
                 $target.children().trigger('focus');
@@ -1842,6 +1883,9 @@
                 _.windowWidth = $(window).width();
                 _.checkResponsive();
                 if( !_.unslicked ) { _.setPosition(); }
+                if ( _.options.siaCustomisations ) {
+                    _.$slider.trigger("resize");
+                }
             }, 50);
         }
     };
@@ -2300,15 +2344,31 @@
                 for (i = _.slideCount; i > (_.slideCount -
                         infiniteCount); i -= 1) {
                     slideIndex = i - 1;
-                    $(_.$slides[slideIndex]).clone(true).attr('id', '')
-                        .attr('data-slick-index', slideIndex - _.slideCount)
-                        .prependTo(_.$slideTrack).addClass('slick-cloned');
+                    if ( _.options.siaCustomisations ) {
+                        var cloneItem = $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                            .attr('data-slick-index', slideIndex - _.slideCount)
+                            .prependTo(_.$slideTrack).addClass('slick-cloned');
+                            $(_.$slides[slideIndex]).data('slick-cloned', cloneItem);
+                    }
+                    else {
+                        $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                            .attr('data-slick-index', slideIndex - _.slideCount)
+                            .prependTo(_.$slideTrack).addClass('slick-cloned');
+                    }
                 }
                 for (i = 0; i < infiniteCount; i += 1) {
                     slideIndex = i;
-                    $(_.$slides[slideIndex]).clone(true).attr('id', '')
-                        .attr('data-slick-index', slideIndex + _.slideCount)
-                        .appendTo(_.$slideTrack).addClass('slick-cloned');
+                    if ( _.options.siaCustomisations ) {
+                        var cloneItem = $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                            .attr('data-slick-index', slideIndex + _.slideCount)
+                            .appendTo(_.$slideTrack).addClass('slick-cloned');
+                            $(_.$slides[slideIndex]).data('slick-cloned', cloneItem);
+                    }
+                    else {
+                        $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                            .attr('data-slick-index', slideIndex + _.slideCount)
+                            .appendTo(_.$slideTrack).addClass('slick-cloned');
+                    }
                 }
                 _.$slideTrack.find('.slick-cloned').find('[id]').each(function() {
                     $(this).attr('id', '');
@@ -2544,6 +2604,12 @@
         _.dragging = false;
         _.interrupted = false;
         _.shouldClick = ( _.touchObject.swipeLength > 10 ) ? false : true;
+
+        if ( _.options.siaCustomisations ) {
+            if(!_.shouldClick){
+                event.preventDefault();
+            }
+        }
 
         if ( _.touchObject.curX === undefined ) {
             return false;
