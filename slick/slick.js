@@ -129,6 +129,7 @@
             _.focussed = false;
             _.interrupted = false;
             _.hidden = 'hidden';
+            _.hiddenAssistive = 'slick-hidden-assistive';
             _.paused = true;
             _.positionProp = null;
             _.respondTo = null;
@@ -502,7 +503,37 @@
             }
 
         }
+        else if (_.options.dots === false && _.slideCount > _.options.slidesToShow ) {
+            if ( _.options.assistiveTechnology === true ) {
 
+                _.$slider.addClass('slick-dotted');
+
+                dot = $('<ul />').addClass(_.options.dotsClass).addClass(_.hiddenAssistive);
+
+                for (i = 0; i <= _.getDotCount(); i += 1) {
+                    dot.append($('<li />').append(_.options.customPaging.call(this, _, i)));
+                }
+
+                _.$dots = dot.prependTo(_.options.appendDots);
+                _.$dots.find('li').first().addClass('slick-active');
+
+                _.revealOnFocus(_.$dots);
+            }
+        }
+
+    };
+
+    Slick.prototype.revealOnFocus = function(dotsSelector) {
+
+        var _ = this;
+
+        dotsSelector
+            .on('focus', '[role="tab"]', function() {
+                dotsSelector.removeClass(_.hiddenAssistive);
+            })
+            .on('blur', '[role="tab"]', function() {
+                dotsSelector.addClass(_.hiddenAssistive);
+            });
     };
 
     Slick.prototype.buildSlideGroups = function() {
@@ -527,6 +558,8 @@
                                 'id': 'slick-slideGroup' + (_.instanceUid + id),
                                 'aria-labelledby': 'slick-navigation' + (_.instanceUid + id)
                             });
+
+                    // TODO: if ( _.dots === false ) { aria-label
 
                     id += 1;
                 }
@@ -1418,6 +1451,13 @@
                 message: 'index'
             }, _.changeSlide);
         }
+        else if (_.options.dots === false && _.slideCount > _.options.slidesToShow) {
+            if ( _.options.assistiveTechnology === true ) {
+                $('li', _.$dots).on('click.slick', {
+                    message: 'index'
+                }, _.changeSlide);
+            }
+        }
 
         if ( _.options.dots === true && _.options.pauseOnDotsHover === true ) {
 
@@ -1425,6 +1465,13 @@
                 .on('mouseenter.slick', $.proxy(_.interrupt, _, true))
                 .on('mouseleave.slick', $.proxy(_.interrupt, _, false));
 
+        }
+        else if ( _.options.dots === false && _.options.pauseOnDotsHover === true ) {
+            if ( _.options.assistiveTechnology === true ) {
+                $('li', _.$dots)
+                    .on('mouseenter.slick', $.proxy(_.interrupt, _, true))
+                    .on('mouseleave.slick', $.proxy(_.interrupt, _, false));
+            }
         }
 
     };
@@ -1502,6 +1549,11 @@
 
             _.$dots.show();
 
+        }
+        else if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
+            if ( _.options.assistiveTechnology === true ) {
+                _.$dots.show();
+            }
         }
 
     };
@@ -2267,11 +2319,12 @@
                 var id = targetSlide / _.options.slidesToShow;
                 var $target = $('#slick-slideGroup' + (_.instanceUid + id));
 
+                // TODO: this is always targetting the first slider set up on the page
                 $target
                     .attr('tabindex', -1)
                     .focus();
 
-                _.focusProxy($target, _.$list);
+                //_.focusProxy($target, _.$list); // TODO: not working
             }
         }
     };
@@ -2662,6 +2715,11 @@
 
             _.$dots.hide();
 
+        }
+        else if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
+            if ( _.options.assistiveTechnology === true ) {
+                _.$dots.hide();
+            }
         }
 
         _.$slider.addClass('slick-loading');
