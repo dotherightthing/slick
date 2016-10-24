@@ -2234,6 +2234,27 @@
 
     };
 
+    Slick.prototype.focusProxy = function(original, proxy) {
+
+        var _ = this;
+
+        if ( _.options.assistiveTechnology === true ) {
+
+            _.$slider
+                .on('focus.assistiveTechnology', original, function() {
+
+                    $('.slick-focus').removeClass('slick-focus');
+                    proxy.addClass('slick-focus');
+                })
+                .on('blur.assistiveTechnology', original, function(e) {
+                    e.stopImmediatePropagation();
+                    proxy.removeClass('slick-focus'); // NOT WORKING
+                    _.$slider.triggerHandler('blur.assistiveTechnology', original); // NOT WORKING
+                })
+                .triggerHandler('focus.assistiveTechnology', original);
+        }
+    };
+
     Slick.prototype.setFocus = function(index) {
 
         var _ = this;
@@ -2244,13 +2265,13 @@
 
                 var targetSlide = index;
                 var id = targetSlide / _.options.slidesToShow;
+                var $target = $('#slick-slideGroup' + (_.instanceUid + id));
 
-                setTimeout( function() {
-                    $('#slick-slideGroup' + (_.instanceUid + id))
-                        .attr('tabindex',-1)
-                        .focus();
-                }, 50);
+                $target
+                    .attr('tabindex', -1)
+                    .focus();
 
+                _.focusProxy($target, _.$list);
             }
         }
     };

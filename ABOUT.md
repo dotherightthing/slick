@@ -8,6 +8,7 @@ Note: these options are for a slider containing `apples`.
 
     accessibility: true, // existing accessibility options
     assistiveTechnology: true, // new accessibility options
+    centerMode: false, // centerMode focussing is not supported yet
     customPaging: function(slider, i) {
       var index = (i+1);
       return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of apples'); // unique and descriptive labels
@@ -110,3 +111,4 @@ Note: these options are for a slider containing `apples`.
 * https://www.w3.org/TR/wai-aria-1.1/#tablist
 * https://www.w3.org/TR/wai-aria-1.1/#tabpanel
 * https://www.w3.org/TR/wai-aria-practices/#tabpanel
+* https://developer.mozilla.org/en-US/docs/Web/CSS/outline
