@@ -590,8 +590,8 @@
                             .addClass('slick-slideGroup')
                             .attr({
                                 'role': 'tabpanel',
-                                'id': 'slick-slideGroup' + (_.instanceUid + id),
-                                'aria-labelledby': 'slick-navigation' + (_.instanceUid + id)
+                                'id': 'slick-slideGroup' + (_.instanceUid + '_' + id),
+                                'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + id)
                             });
 
                     // TODO: if ( _.dots === false ) { aria-label
@@ -1444,8 +1444,8 @@
                     $(this).attr('role','presentation')
                         .find('button').attr({
                             'role': 'tab',
-                            'aria-controls': 'slick-slideGroup' + (_.instanceUid + i),
-                            'id': 'slick-navigation' + (_.instanceUid + i)
+                            'aria-controls': 'slick-slideGroup' + (_.instanceUid + '_' + i),
+                            'id': 'slick-navigation' + (_.instanceUid + '_' + i)
                         });
                 });
 
@@ -2365,7 +2365,7 @@
 
                 var targetSlide = index;
                 var id = targetSlide / _.options.slidesToShow;
-                var $target = $('#slick-slideGroup' + (_.instanceUid + id));
+                var $target = $('#slick-slideGroup' + (_.instanceUid + '_' + id));
 
                 // TODO: this is always targetting the first slider set up on the page
                 $target
