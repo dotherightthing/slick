@@ -76,11 +76,14 @@
 .slick-slideGroup,
 .slick-slide
 {
-    display: none;
     float: left;
 
     height: 100%;
     min-height: 1px;
+}
+.slick-slide
+{
+    display: none;
 }
 [dir='rtl'] .slick-slideGroup,
 [dir='rtl'] .slick-slide
