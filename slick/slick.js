@@ -29,33 +29,6 @@
     'use strict';
     var Slick = window.Slick || {};
 
-    if ( _.options.siaCustomisations === true ) {
-
-        var getDataOptions = function(data) {
-            var options = {};
-            var lowercaseFirstLetter = function(string) {
-                return string.charAt(0).toLowerCase() + string.slice(1);
-            }
-
-            var parseOptions = function(optionKey, optionData) {
-                var options = {};
-
-                if(/^(slick)/gi.test(optionKey)) {
-                    var messageRule = optionKey.split('slick')[1];
-                    options[lowercaseFirstLetter(messageRule)] = optionData;
-                }
-
-                return options;
-            };
-
-            for(var key in data) {
-                options = $.extend(true, options, parseOptions(key, data[key]));
-            }
-
-            return options;
-        };
-    }
-
     Slick = (function() {
 
         var instanceUid = 0;
@@ -217,6 +190,35 @@
         return Slick;
 
     }());
+
+    Slick.prototype.getDataOptions = function(data) {
+        var _ = this;
+
+        if ( _.options.siaCustomisations === true ) {
+
+            var options = {};
+            var lowercaseFirstLetter = function(string) {
+                return string.charAt(0).toLowerCase() + string.slice(1);
+            };
+
+            var parseOptions = function(optionKey, optionData) {
+                var options = {};
+
+                if(/^(slick)/gi.test(optionKey)) {
+                    var messageRule = optionKey.split('slick')[1];
+                    options[lowercaseFirstLetter(messageRule)] = optionData;
+                }
+
+                return options;
+            };
+
+            for(var key in data) {
+                options = $.extend(true, options, parseOptions(key, data[key]));
+            }
+
+            return options;
+        }
+    };
 
     Slick.prototype.activateADA = function() {
         var _ = this;
@@ -746,15 +748,17 @@
                 break;
 
             case 'index':
+                var index;
+
                 if ( _.options.siaCustomisations === true) {
                     var el = $(event.target).is('li') ? $(event.target) : $(event.target).parent();
 
-                    var index = event.data.index === 0 ? 0 :
-                        event.data.index || el.index() * _.options.slidesToScroll;
+                    index = event.data.index === 0 ? 0 :
+                    event.data.index || el.index() * _.options.slidesToScroll;
                 }
                 else {
-                    var index = event.data.index === 0 ? 0 :
-                        event.data.index || $target.index() * _.options.slidesToScroll;
+                    index = event.data.index === 0 ? 0 :
+                    event.data.index || $target.index() * _.options.slidesToScroll;
                 }
 
                 _.slideHandler(_.checkNavigable(index), false, dontAnimate);
