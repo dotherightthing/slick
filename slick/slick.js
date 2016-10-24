@@ -594,8 +594,6 @@
                                 'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + id)
                             });
 
-                    // TODO: if ( _.dots === false ) { aria-label
-
                     id += 1;
                 }
             });
@@ -2393,14 +2391,15 @@
                 var targetSlide = index;
                 var id = targetSlide / _.options.slidesToShow;
                 var $target = $('#slick-slideGroup' + (_.instanceUid + '_' + id));
-                var x = window.scrollX;
-                var y = window.scrollY;
+                var y = $(window).scrollTop();
 
                 $target
                     .attr('tabindex', -1)
                     .focus();
 
-                window.scrollTo(x, y);
+                    setTimeout( function () {
+                        window.scrollTo( 0, y );
+                    }, 100);
 
                 //_.focusProxy($target, _.$list); // TODO: not working
             }
