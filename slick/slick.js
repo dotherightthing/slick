@@ -2064,7 +2064,7 @@
         if ( _.options.assistiveTechnology === true ) {
             if (_.options.variableWidth === false) _.$slideTrack.find('.slick-slide').width(_.slideWidth - offset);
 
-            _.$slideTrack.find('.slick-slideGroup').width( (_.slideWidth - offset) * _.options.slidesToShow );
+            _.$slideTrack.find('.slick-slideGroup').width( _.$slides.first().outerWidth(true) * _.options.slidesToShow );
         }
         else {
             if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
