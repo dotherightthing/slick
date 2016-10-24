@@ -1194,9 +1194,19 @@
         if (_.options.variableWidth === true) {
 
             if (_.slideCount <= _.options.slidesToShow || _.options.infinite === false) {
-                targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex);
+                if ( _.options.assistiveTechnology === true ) {
+                    targetSlide = _.$slideTrack.find('.slick-slide').eq(slideIndex);
+                }
+                else {
+                    targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex);
+                }
             } else {
-                targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex + _.options.slidesToShow);
+                if ( _.options.assistiveTechnology === true ) {
+                    targetSlide = _.$slideTrack.find('.slick-slide').eq(slideIndex + _.options.slidesToShow);
+                }
+                else {
+                    targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex + _.options.slidesToShow);
+                }
             }
 
             if (_.options.rtl === true) {
@@ -1211,9 +1221,19 @@
 
             if (_.options.centerMode === true) {
                 if (_.slideCount <= _.options.slidesToShow || _.options.infinite === false) {
-                    targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex);
+                    if ( _.options.assistiveTechnology === true ) {
+                        targetSlide = _.$slideTrack.find('.slick-slide').eq(slideIndex);
+                    }
+                    else {
+                        targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex);
+                    }
                 } else {
-                    targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex + _.options.slidesToShow + 1);
+                    if ( _.options.assistiveTechnology === true ) {
+                        targetSlide = _.$slideTrack.find('.slick-slide').eq(slideIndex + _.options.slidesToShow + 1);
+                    }
+                    else {
+                        targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex + _.options.slidesToShow + 1);
+                    }
                 }
 
                 if (_.options.rtl === true) {
@@ -2122,7 +2142,14 @@
             _.$slideTrack.find('.slick-slideGroup').width( _.$slides.first().outerWidth(true) * _.options.slidesToShow );
         }
         else {
-            if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
+            if (_.options.variableWidth === false) {
+                if ( _.options.assistiveTechnology === true ) {
+                    _.$slideTrack.find('.slick-slide').width(_.slideWidth - offset);
+                }
+                else {
+                    _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
+                }
+            }
         }
     };
 
@@ -2404,6 +2431,9 @@
         if ( _.options.assistiveTechnology ) {
             if ( _.options.fade === true ) {
                 _.$slider.addClass('slick-fade');
+            }
+            if ( _.options.variableWidth === true ) {
+                _.$slider.addClass('slick-variableWidth');
             }
         }
 

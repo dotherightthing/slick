@@ -80,31 +80,31 @@
 
   <section class="center slider">
     <div>
-      <img src="http://placehold.it/350x300?text=Center%201">
+      <img src="http://placehold.it/350x300?text=CenterMode%201">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%202">
+      <img src="http://placehold.it/350x300?text=CenterMode%202">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%203">
+      <img src="http://placehold.it/350x300?text=CenterMode%203">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%204">
+      <img src="http://placehold.it/350x300?text=CenterMode%204">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%205">
+      <img src="http://placehold.it/350x300?text=CenterMode%205">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%206">
+      <img src="http://placehold.it/350x300?text=CenterMode%206">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%207">
+      <img src="http://placehold.it/350x300?text=CenterMode%207">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%208">
+      <img src="http://placehold.it/350x300?text=CenterMode%208">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=Center%209">
+      <img src="http://placehold.it/350x300?text=CenterMode%209">
     </div>
   </section>
 
@@ -160,13 +160,13 @@
         assistiveTechnology: true,
         customPaging: function(slider, i) {
           var index = (i+1);
-          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of apples');
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of oranges');
         },
         focusOnSelect: true,
-        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of apples" tabindex="0" role="button">Next</button>',
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of oranges" tabindex="0" role="button">Next</button>',
         pauseOnFocus: true,
         pauseOnHover: true,
-        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of apples" tabindex="0" role="button">Previous</button>',
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of oranges" tabindex="0" role="button">Previous</button>',
         rows: 1,
         variableWidth: false
       });
@@ -193,7 +193,7 @@
       $(".variable").slick({
         dots: true,
         infinite: true,
-        variableWidth: false, // true,
+        variableWidth: true,
         accessibility: true,
         assistiveTechnology: true,
         customPaging: function(slider, i) {

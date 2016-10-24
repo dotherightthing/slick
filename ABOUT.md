@@ -8,7 +8,6 @@ Note: these options are for a slider containing `apples`.
 
     accessibility: true, // existing accessibility options
     assistiveTechnology: true, // new accessibility options
-    centerMode: false, // centerMode focussing is not supported yet
     customPaging: function(slider, i) {
       var index = (i+1);
       return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of apples'); // unique and descriptive labels
@@ -20,7 +19,6 @@ Note: these options are for a slider containing `apples`.
     pauseOnHover: true, // don't change the context while the user is interacting with the slider
     prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of apples" tabindex="0" role="button">Previous</button>', // unique and descriptive label
     rows: 1, // multiple rows are not supported yet
-    variableWidth: false // variableWidth is not supported yet
 
 ---
 
