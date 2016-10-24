@@ -37,7 +37,7 @@ Note: these options are for a slider containing `apples`.
 * A `listbox` is a widget that allows the user to select one or more items from a list of `option`s. It is structurally equivalent to a `select` element.
 * A carousel does not meet this definition of a `listbox`.
 
-#### options.assistiveTechnology
+#### options.assistiveTechnology (JS)
 
 * This `role` was removed from each slide.
 
@@ -49,12 +49,13 @@ Note: these options are for a slider containing `apples`.
 * A single control dot may affect multiple slides. When a control dot is clicked, the slider visually updates, but the focus does not change and the user is unable to interact with the new content. This one-to-many relationship takes control away from the user and makes slider navigation abstract and unpredictable.
 * `aria-live` indicates a change in the slider state, but does not guide the user directly to the new content. Multiple sliders create a lot of distracting noise.
 
-#### options.assistiveTechnology: `role="tabpanel"`
+#### options.assistiveTechnology: `role="tabpanel"` (JS, HTML, CSS)
 
 * A new function, `buildSlideGroups`, wraps a `<div>` around each set of slides.
 * This is assigned a `role` of `tabpanel`, to indicate that it is a container for the resources associated with the control dot `tab`.
 * The `tabpanel` is linked to the control dot `tab` through the `aria-controls` and `aria-labelledby` attributes.
 * When a control dot `tab` is clicked, the new function `setFocus` pushes the focus to the target `tabpanel`.
+* The new focus is displayed to the user. This is via a proxy element, as the slideGroup's edges are cropped by its parent container.
 * The user can then navigate the slide content as they wish.
 * Clone slides, added by `options.infinite`, are removed from the accessibility tree with a `role` of `presentation`
 
@@ -68,7 +69,7 @@ Note: these options are for a slider containing `apples`.
 
 * The control dots `tablist` follow the slides in the tab order.
 
-#### options.assistiveTechnology
+#### options.assistiveTechnology (JS)
 
 * The existing `tablist` uses absolute positioning, so its location in the DOM is flexible.
 * `tablist` moved in front of the `tabpanel` elements, so that the user discovers the control dots before the controlled slides.
@@ -79,7 +80,7 @@ Note: these options are for a slider containing `apples`.
 
 * The existing `<li/>` wrappers have a `role` of `presentation`. This removes them from the accessibility tree. As a result their other attributes are being ignored.
 
-#### options.assistiveTechnology
+#### options.assistiveTechnology (JS)
 
 * These attributes are relocated to the nested `button` elements.
 
@@ -90,7 +91,7 @@ Note: these options are for a slider containing `apples`.
 * While a `button` describes the nature of the control, there is no semantic link to the visible slide.
 * A `toolbar` is (just) a collection of commonly used function buttons or controls represented in compact visual form.
 
-#### options.assistiveTechnology: `role="tablist"` + `role="tab"`
+#### options.assistiveTechnology: `role="tablist"` + `role="tab"` (JS)
 
 * The dot `role` was changed to `tab` to meet the requirements of the parent `tablist`.
 * The redundant `role` of `toolbar` was removed
