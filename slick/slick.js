@@ -2980,16 +2980,34 @@
 
         if (_.$dots !== null) {
 
-            _.$dots
-                .find('li')
-                .removeClass('slick-active')
-                .attr('aria-hidden', 'true');
+            if ( _.options.assistiveTechnology === true) {
+                _.$dots
+                    .find('li')
+                    .removeClass('slick-active')
+                    .find('[role="tab"]')
+                    .attr('aria-selected', 'false');
 
-            _.$dots
-                .find('li')
-                .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
-                .addClass('slick-active')
-                .attr('aria-hidden', 'false');
+                _.$dots
+                    .find('li')
+                    .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
+                    .addClass('slick-active')
+                    .find('[role="tab"]')
+                    .attr('aria-selected', 'true');
+            }
+            else {
+                _.$dots
+                    .find('li')
+                    .removeClass('slick-active')
+                    .attr('aria-hidden', 'true');
+
+                _.$dots
+                    .find('li')
+                    .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
+                    .addClass('slick-active')
+                    .attr('aria-hidden', 'false');
+            }
+
+
 
         }
 
