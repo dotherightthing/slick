@@ -101,6 +101,8 @@ Note: these options are for a slider containing `apples`.
 
 ### References
 
+* http://www.webaxe.org/carousels-and-aria-tabs/
+* https://www.sitepoint.com/unbearable-accessible-slideshow/
 * http://whatsock.com/training/matrices/#listbox
 * http://whatsock.com/training/matrices/#presentation
 * http://whatsock.com/training/matrices/#tablist
