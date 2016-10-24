@@ -2397,9 +2397,7 @@
                     .attr('tabindex', -1)
                     .focus();
 
-                    setTimeout( function () {
-                        window.scrollTo( 0, y );
-                    }, 100);
+                    window.scrollTo( 0, y );
 
                 //_.focusProxy($target, _.$list); // TODO: not working
             }
