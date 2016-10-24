@@ -2446,6 +2446,12 @@
         var _ = this,
             centerOffset, allSlides, indexOffset, remainder;
 
+        if ( _.options.assistiveTechnology ) {
+            if ( _.options.fade === true ) {
+                _.$slider.addClass('slick-fade');
+            }
+        }
+
         allSlides = _.$slider
             .find('.slick-slide')
             .removeClass('slick-active slick-center slick-current')
