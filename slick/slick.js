@@ -1325,10 +1325,13 @@
 
             _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
                 'aria-hidden': 'true',
-                'tabindex': '-1',
-                'role': 'presentation'
+                'tabindex': '-1'
             }).find('a, input, button, select').attr({
                 'tabindex': '-1'
+            });
+
+            _.$slideTrack.find('.slick-cloned').attr({
+                'role': 'presentation'
             });
 
             if ( index !== 'undefined' ) {
