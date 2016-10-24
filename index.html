@@ -57,54 +57,75 @@
     </div>
   </section>
 
+  <section class="fade slider">
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=Fade%201"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=Fade%202"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=Fade%203"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=Fade%204"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=Fade%205"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=Fade%206"></a>
+    </div>
+  </section>
+
   <section class="center slider">
     <div>
-      <img src="http://placehold.it/350x300?text=1">
+      <img src="http://placehold.it/350x300?text=Center%201">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=2">
+      <img src="http://placehold.it/350x300?text=Center%202">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=3">
+      <img src="http://placehold.it/350x300?text=Center%203">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=4">
+      <img src="http://placehold.it/350x300?text=Center%204">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=5">
+      <img src="http://placehold.it/350x300?text=Center%205">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=6">
+      <img src="http://placehold.it/350x300?text=Center%206">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=7">
+      <img src="http://placehold.it/350x300?text=Center%207">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=8">
+      <img src="http://placehold.it/350x300?text=Center%208">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=9">
+      <img src="http://placehold.it/350x300?text=Center%209">
     </div>
   </section>
 
   <section class="variable slider">
     <div>
-      <img src="http://placehold.it/350x300?text=1">
+      <img src="http://placehold.it/350x300?text=Variable%201">
     </div>
     <div>
-      <img src="http://placehold.it/200x300?text=2">
+      <img src="http://placehold.it/200x300?text=Variable%202">
     </div>
     <div>
-      <img src="http://placehold.it/100x300?text=3">
+      <img src="http://placehold.it/100x300?text=Variable%203">
     </div>
     <div>
-      <img src="http://placehold.it/200x300?text=4">
+      <img src="http://placehold.it/200x300?text=Variable%204">
     </div>
     <div>
-      <img src="http://placehold.it/350x300?text=5">
+      <img src="http://placehold.it/350x300?text=Variable%205">
     </div>
     <div>
-      <img src="http://placehold.it/300x300?text=6">
+      <img src="http://placehold.it/300x300?text=Variable%206">
     </div>
   </section>
 
@@ -117,6 +138,24 @@
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 3,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of apples');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of apples" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of apples" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+      $(".fade").slick({
+        dots: true,
+        infinite: true,
+        fade: true,
         accessibility: true,
         assistiveTechnology: true,
         customPaging: function(slider, i) {
