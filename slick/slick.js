@@ -67,6 +67,7 @@
             _.defaults = {
                 siaCustomisations: false, // SIA modifications to 1.5.0
                 accessibility: true,
+                assistiveTechnology: false,
                 adaptiveHeight: false,
                 appendArrows: $(element),
                 appendDots: $(element),
@@ -80,7 +81,7 @@
                 centerPadding: '50px',
                 cssEase: 'ease',
                 customPaging: function(slider, i) {
-                    return $('<button type="button" data-role="none" role="button" tabindex="0" />').text(i + 1);
+                    return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text(i + 1);
                 },
                 dots: false,
                 dotsClass: 'slick-dots',
@@ -524,12 +525,46 @@
                 dot.append($('<li />').append(_.options.customPaging.call(this, _, i)));
             }
 
-            _.$dots = dot.appendTo(_.options.appendDots);
-
-            _.$dots.find('li').first().addClass('slick-active').attr('aria-hidden', 'false');
+            if ( _.options.assistiveTechnology === true ) {
+                _.$dots = dot.prependTo(_.options.appendDots);
+                _.$dots.find('li').first().addClass('slick-active');
+            }
+            else {
+                _.$dots = dot.appendTo(_.options.appendDots);
+                _.$dots.find('li').first().addClass('slick-active').attr('aria-hidden', 'false');
+            }
 
         }
 
+    };
+
+    Slick.prototype.buildSlideGroups = function() {
+
+        var _ = this,
+            i,
+            id = 0;
+
+        if ( _.options.assistiveTechnology === true ) {
+
+            _.$slides.each( function(i) {
+
+                for ( var j = 0; j < _.slideCount; j += _.options.slidesToShow ) {
+
+                    _.$slides.not('.slick-slideGroup, .slick-slideGroupItem').slice(i, i + _.options.slidesToShow)
+                        .addClass('slick-slideGroupItem')
+                        .wrapAll('<div/>')
+                        .parent()
+                            .addClass('slick-slideGroup')
+                            .attr({
+                                'role': 'tabpanel',
+                                'id': 'slick-slideGroup' + (_.instanceUid + id),
+                                'aria-labelledby': 'slick-navigation' + (_.instanceUid + id)
+                            });
+
+                    id += 1;
+                }
+            });
+        }
     };
 
     Slick.prototype.buildOut = function() {
@@ -555,8 +590,16 @@
             $('<div class="slick-track"/>').appendTo(_.$slider) :
             _.$slides.wrapAll('<div class="slick-track"/>').parent();
 
-        _.$list = _.$slideTrack.wrap(
-            '<div aria-live="polite" class="slick-list"/>').parent();
+        if ( _.options.assistiveTechnology === true ) {
+            _.buildSlideGroups();
+            _.$list = _.$slideTrack.wrap(
+                '<div class="slick-list"/>').parent();
+        }
+        else {
+            _.$list = _.$slideTrack.wrap(
+                '<div aria-live="polite" class="slick-list"/>').parent();
+        }
+
         _.$slideTrack.css('opacity', 0);
 
         if (_.options.centerMode === true || _.options.swipeToSlide === true) {
@@ -1315,36 +1358,71 @@
 
     };
 
-    Slick.prototype.initADA = function() {
+    Slick.prototype.initADA = function(index) {
         var _ = this;
-        _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
-            'aria-hidden': 'true',
-            'tabindex': '-1'
-        }).find('a, input, button, select').attr({
-            'tabindex': '-1'
-        });
 
-        _.$slideTrack.attr('role', 'listbox');
 
-        _.$slides.not(_.$slideTrack.find('.slick-cloned')).each(function(i) {
-            $(this).attr({
-                'role': 'option',
-                'aria-describedby': 'slick-slide' + _.instanceUid + i + ''
+        if ( _.options.assistiveTechnology === true ) {
+
+            _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
+                'aria-hidden': 'true',
+                'tabindex': '-1',
+                'role': 'presentation'
+            }).find('a, input, button, select').attr({
+                'tabindex': '-1'
             });
-        });
+
+            if ( index !== 'undefined' ) {
+                _.setFocus(index);
+            }
+        }
+        else {
+            _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
+                'aria-hidden': 'true',
+                'tabindex': '-1'
+            }).find('a, input, button, select').attr({
+                'tabindex': '-1'
+            });
+        }
+
+        if ( _.options.assistiveTechnology === false ) {
+            _.$slideTrack.attr('role', 'listbox');
+
+            _.$slides.not(_.$slideTrack.find('.slick-cloned')).each(function(i) {
+                $(this).attr({
+                    'role': 'option',
+                    'aria-describedby': 'slick-slide' + _.instanceUid + i + ''
+                });
+            });
+        }
 
         if (_.$dots !== null) {
-            _.$dots.attr('role', 'tablist').find('li').each(function(i) {
-                $(this).attr({
-                    'role': 'presentation',
-                    'aria-selected': 'false',
-                    'aria-controls': 'navigation' + _.instanceUid + i + '',
-                    'id': 'slick-slide' + _.instanceUid + i + ''
+
+            if ( _.options.assistiveTechnology === true ) {
+
+                _.$dots.attr('role', 'tablist').find('li').each(function(i) {
+                    $(this).attr('role','presentation')
+                        .find('button').attr({
+                            'role': 'tab',
+                            'aria-controls': 'slick-slideGroup' + (_.instanceUid + i),
+                            'id': 'slick-navigation' + (_.instanceUid + i)
+                        });
                 });
-            })
-                .first().attr('aria-selected', 'true').end()
-                .find('button').attr('role', 'button').end()
-                .closest('div').attr('role', 'toolbar');
+
+            }
+            else {
+                _.$dots.attr('role', 'tablist').find('li').each(function(i) {
+                    $(this).attr({
+                        'role': 'presentation',
+                        'aria-selected': 'false',
+                        'aria-controls': 'navigation' + _.instanceUid + i + '',
+                        'id': 'slick-slide' + _.instanceUid + i + ''
+                    });
+                })
+                    .first().attr('aria-selected', 'true').end()
+                    .find('button').attr('role', 'button').end()
+                    .closest('div').attr('role', 'toolbar');
+            }
         }
         _.activateADA();
 
@@ -1469,8 +1547,27 @@
     Slick.prototype.keyHandler = function(event) {
 
         var _ = this;
+
+        if ( _.options.assistiveTechnology === true && $(event.target).is('[role="tab"]') ) {
+
+            if (  event.keyCode === 37 || event.keyCode === 38 ) {
+                _.changeSlide({
+                    data: {
+                        message: _.options.rtl === true ? 'next' :  'previous'
+                    }
+                });
+            }
+            else if ( event.keyCode === 39 || event.keyCode === 40 ) {
+                _.changeSlide({
+                    data: {
+                        message: _.options.rtl === true ? 'previous' : 'next'
+                    }
+                });
+            }
+        }
+        else if(!event.target.tagName.match('TEXTAREA|INPUT|SELECT')) {
          //Dont slide if the cursor is inside the form fields and arrow keys are pressed
-        if(!event.target.tagName.match('TEXTAREA|INPUT|SELECT')) {
+
             if (event.keyCode === 37 && _.options.accessibility === true) {
                 _.changeSlide({
                     data: {
@@ -1649,7 +1746,13 @@
             }
 
             if (_.options.accessibility === true) {
-                _.initADA();
+
+                if ( _.options.assistiveTechnology === true ) {
+                    _.initADA(index);
+                }
+                else {
+                    _.initADA();
+                }
             }
 
         }
@@ -2151,6 +2254,27 @@
 
         _.$slider.trigger('setPosition', [_]);
 
+    };
+
+    Slick.prototype.setFocus = function(index) {
+
+        var _ = this;
+
+        if ( _.options.assistiveTechnology === true ) {
+
+            if ( _.$slider.find(':focus').length ) {
+
+                var targetSlide = index;
+                var id = targetSlide / _.options.slidesToShow;
+
+                setTimeout( function() {
+                    $('#slick-slideGroup' + (_.instanceUid + id))
+                        .attr('tabindex',-1)
+                        .focus();
+                }, 50);
+
+            }
+        }
     };
 
     Slick.prototype.setProps = function() {
