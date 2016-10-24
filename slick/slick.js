@@ -2038,18 +2038,37 @@
 
         if (_.options.vertical === false && _.options.variableWidth === false) {
             _.slideWidth = Math.ceil(_.listWidth / _.options.slidesToShow);
-            _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.children('.slick-slide').length)));
+
+            if ( _.options.assistiveTechnology === true ) {
+                _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.find('.slick-slide').length)));
+            }
+            else {
+                _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.children('.slick-slide').length)));
+            }
 
         } else if (_.options.variableWidth === true) {
             _.$slideTrack.width(5000 * _.slideCount);
         } else {
             _.slideWidth = Math.ceil(_.listWidth);
-            _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.children('.slick-slide').length)));
+
+            if ( _.options.assistiveTechnology === true ) {
+                _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.find('.slick-slide').length)));
+            }
+            else {
+                _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.children('.slick-slide').length)));
+            }
         }
 
         var offset = _.$slides.first().outerWidth(true) - _.$slides.first().width();
-        if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
 
+        if ( _.options.assistiveTechnology === true ) {
+            if (_.options.variableWidth === false) _.$slideTrack.find('.slick-slide').width(_.slideWidth - offset);
+
+            _.$slideTrack.find('.slick-slideGroup').width( (_.slideWidth - offset) * _.options.slidesToShow );
+        }
+        else {
+            if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
+        }
     };
 
     Slick.prototype.setFade = function() {
