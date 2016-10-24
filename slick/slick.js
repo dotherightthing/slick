@@ -143,7 +143,7 @@
             _.windowTimer = null;
 
             if ( _.siaCustomisations === true ) {
-                dataSettings = $(element).data('slick') || getDataOptions($(element).data()) || {};
+                dataSettings = $(element).data('slick') || _.getDataOptions($(element).data()) || {};
             }
             else {
                 dataSettings = $(element).data('slick') || {};
