@@ -2318,11 +2318,14 @@
                 var targetSlide = index;
                 var id = targetSlide / _.options.slidesToShow;
                 var $target = $('#slick-slideGroup' + (_.instanceUid + '_' + id));
+                var x = window.scrollX;
+                var y = window.scrollY;
 
-                // TODO: this is always targetting the first slider set up on the page
                 $target
                     .attr('tabindex', -1)
                     .focus();
+
+                window.scrollTo(x, y);
 
                 //_.focusProxy($target, _.$list); // TODO: not working
             }
