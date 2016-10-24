@@ -2086,18 +2086,37 @@
 
         if (_.options.vertical === false && _.options.variableWidth === false) {
             _.slideWidth = Math.ceil(_.listWidth / _.options.slidesToShow);
-            _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.children('.slick-slide').length)));
+
+            if ( _.options.assistiveTechnology === true ) {
+                _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.find('.slick-slide').length)));
+            }
+            else {
+                _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.children('.slick-slide').length)));
+            }
 
         } else if (_.options.variableWidth === true) {
             _.$slideTrack.width(5000 * _.slideCount);
         } else {
             _.slideWidth = Math.ceil(_.listWidth);
-            _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.children('.slick-slide').length)));
+
+            if ( _.options.assistiveTechnology === true ) {
+                _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.find('.slick-slide').length)));
+            }
+            else {
+                _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.children('.slick-slide').length)));
+            }
         }
 
         var offset = _.$slides.first().outerWidth(true) - _.$slides.first().width();
-        if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
 
+        if ( _.options.assistiveTechnology === true ) {
+            if (_.options.variableWidth === false) _.$slideTrack.find('.slick-slide').width(_.slideWidth - offset);
+
+            _.$slideTrack.find('.slick-slideGroup').width( _.$slides.first().outerWidth(true) * _.options.slidesToShow );
+        }
+        else {
+            if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
+        }
     };
 
     Slick.prototype.setFade = function() {
@@ -3031,16 +3050,34 @@
 
         if (_.$dots !== null) {
 
-            _.$dots
-                .find('li')
-                .removeClass('slick-active')
-                .attr('aria-hidden', 'true');
+            if ( _.options.assistiveTechnology === true) {
+                _.$dots
+                    .find('li')
+                    .removeClass('slick-active')
+                    .find('[role="tab"]')
+                    .attr('aria-selected', 'false');
 
-            _.$dots
-                .find('li')
-                .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
-                .addClass('slick-active')
-                .attr('aria-hidden', 'false');
+                _.$dots
+                    .find('li')
+                    .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
+                    .addClass('slick-active')
+                    .find('[role="tab"]')
+                    .attr('aria-selected', 'true');
+            }
+            else {
+                _.$dots
+                    .find('li')
+                    .removeClass('slick-active')
+                    .attr('aria-hidden', 'true');
+
+                _.$dots
+                    .find('li')
+                    .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
+                    .addClass('slick-active')
+                    .attr('aria-hidden', 'false');
+            }
+
+
 
         }
 
