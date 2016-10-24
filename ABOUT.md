@@ -58,6 +58,7 @@ Note: these options are for a slider containing `apples`.
 * The new focus is displayed to the user. This is via a proxy element, as the slideGroup's edges are cropped by its parent container.
 * The user can then navigate the slide content as they wish.
 * Clone slides, added by `options.infinite`, are removed from the accessibility tree with a `role` of `presentation`
+* Removed the `aria-live` altogether.
 
 ---
 
