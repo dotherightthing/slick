@@ -29,7 +29,7 @@
     'use strict';
     var Slick = window.Slick || {};
 
-    if ( _.options.siaCustomisations ) {
+    if ( _.options.siaCustomisations === true ) {
 
         var getDataOptions = function(data) {
             var options = {};
@@ -1883,7 +1883,7 @@
                 _.windowWidth = $(window).width();
                 _.checkResponsive();
                 if( !_.unslicked ) { _.setPosition(); }
-                if ( _.options.siaCustomisations ) {
+                if ( _.options.siaCustomisations === true ) {
                     _.$slider.trigger("resize");
                 }
             }, 50);
@@ -2344,7 +2344,7 @@
                 for (i = _.slideCount; i > (_.slideCount -
                         infiniteCount); i -= 1) {
                     slideIndex = i - 1;
-                    if ( _.options.siaCustomisations ) {
+                    if ( _.options.siaCustomisations === true ) {
                         var cloneItem = $(_.$slides[slideIndex]).clone(true).attr('id', '')
                             .attr('data-slick-index', slideIndex - _.slideCount)
                             .prependTo(_.$slideTrack).addClass('slick-cloned');
@@ -2358,7 +2358,7 @@
                 }
                 for (i = 0; i < infiniteCount; i += 1) {
                     slideIndex = i;
-                    if ( _.options.siaCustomisations ) {
+                    if ( _.options.siaCustomisations === true ) {
                         var cloneItem = $(_.$slides[slideIndex]).clone(true).attr('id', '')
                             .attr('data-slick-index', slideIndex + _.slideCount)
                             .appendTo(_.$slideTrack).addClass('slick-cloned');
@@ -2605,7 +2605,7 @@
         _.interrupted = false;
         _.shouldClick = ( _.touchObject.swipeLength > 10 ) ? false : true;
 
-        if ( _.options.siaCustomisations ) {
+        if ( _.options.siaCustomisations === true ) {
             if(!_.shouldClick){
                 event.preventDefault();
             }
