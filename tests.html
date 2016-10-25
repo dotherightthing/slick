@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slick Playground</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding-bottom: 200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    *:focus,
+    a:focus > img {
+      outline: 3px solid red !important;
+    }
+
+    .slick-slideGroup:focus {
+      background: red;
+    }
+
+    h2,
+    h3,
+    .slider {
+        width: 50%;
+        margin: 50px auto;
+    }
+
+    h2 {
+      text-align: center;
+      padding-top: 50px;
+      border-top: 1px solid;
+      margin-top: 100px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .slick-slide {
+      margin: 0px 20px;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+        color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Test 1</h2>
+  <h3>Regular: 8 content slots, configured for 4 per slide (no AT)</h3>
+
+  <section class="regular slider">
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=1"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=2"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=3"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=4"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=1"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=2"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=3"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=4"></a>
+    </div>
+  </section>
+
+  <h2>Test 2</h2>
+  <h3>Regular: 8 content slots, configured for 4 per slide (AT)</h3>
+
+  <section class="regularAT slider">
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=1"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=2"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=3"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=4"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=1"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=2"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=3"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=4"></a>
+    </div>
+  </section>
+
+  <h2>Test 3</h2>
+  <h3>Irregular: 5 content slots, configured for 4 per slide (no AT)</h3>
+
+  <section class="irregular slider">
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=1"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=2"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=3"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=4"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=5"></a>
+    </div>
+  </section>
+
+  <h2>Test 4</h2>
+  <h3>Irregular: 5 content slots, configured for 4 per slide (AT broken)</h3>
+
+  <section class="irregularAT slider">
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=1"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=2"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=3"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=4"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=5"></a>
+    </div>
+  </section>
+
+  <h2>Test 5</h2>
+  <h3>Irregular: 5 content slots, configured for 4 per slide (AT fixed)</h3>
+
+  <section class="irregularATFixed slider">
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=1"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=2"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=3"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=4"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=5"></a>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: false,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of Test 1');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of Test 1" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of Test 1" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+
+      $(".regularAT").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of Test 2');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of Test 2" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of Test 2" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+
+      $(".irregular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: false,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of Test 3');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of Test 3" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of Test 3" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+
+      $(".irregularAT").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of Test 4');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of Test 4" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of Test 4" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+
+      $(".irregularATFixed").slick({
+        debug: true,
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of Test 5');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of Test 5" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of Test 5" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+      /*
+      $(".fade").slick({
+        dots: true,
+        infinite: true,
+        fade: true,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of oranges');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of oranges" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of oranges" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+      $(".center").slick({
+        dots: true,
+        infinite: true,
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of pears');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of pears" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of pears" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+      $(".variable").slick({
+        dots: true,
+        infinite: true,
+        variableWidth: true,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of bananas');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of bananas" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of bananas" tabindex="0" role="button">Previous</button>',
+        rows: 1
+      });
+*/
+    });
+  </script>
+
+</body>
+</html>

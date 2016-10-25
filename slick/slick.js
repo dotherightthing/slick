@@ -2137,7 +2137,10 @@
         if ( _.options.assistiveTechnology === true ) {
             if (_.options.variableWidth === false) _.$slideTrack.find('.slick-slide').width(_.slideWidth - offset);
 
-            _.$slideTrack.find('.slick-slideGroup').width( _.$slides.first().outerWidth(true) * _.options.slidesToShow );
+            _.$slideTrack.find('.slick-slideGroup').each( function(i, item) {
+                var $this = $(item);
+                $this.width( _.$slides.first().outerWidth(true) * $this.children().length );
+            });
         }
         else {
             if (_.options.variableWidth === false) {
