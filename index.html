@@ -57,6 +57,65 @@
     </div>
   </section>
 
+<hr />
+
+  <section class="irregular slider">
+    <!-- config: 4; actual:5 -->
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%201"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%202"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%203"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%204"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%205"></a>
+    </div>
+  </section>
+
+  <section class="irregularAT slider">
+    <!-- config: 4; actual:5 -->
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%201"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%202"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%203"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%204"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%205"></a>
+    </div>
+  </section>
+
+  <section class="irregularATNC slider">
+    <!-- config: 4; actual:5 -->
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%20NC$201"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%20NC$202"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%20NC$203"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%20NC$204"></a>
+    </div>
+    <div>
+      <a href="#"><img src="http://placehold.it/350x300?text=IR%20AT%20NC$205"></a>
+    </div>
+  </section>
+
   <section class="fade slider">
     <div>
       <a href="#"><img src="http://placehold.it/350x300?text=Fade%201"></a>
@@ -129,6 +188,27 @@
     </div>
   </section>
 
+  <section class="variableN slider">
+    <div>
+      <img src="http://placehold.it/350x300?text=Variable N%201">
+    </div>
+    <div>
+      <img src="http://placehold.it/200x300?text=Variable N%202">
+    </div>
+    <div>
+      <img src="http://placehold.it/100x300?text=Variable N%203">
+    </div>
+    <div>
+      <img src="http://placehold.it/200x300?text=Variable N%204">
+    </div>
+    <div>
+      <img src="http://placehold.it/350x300?text=Variable N%205">
+    </div>
+    <div>
+      <img src="http://placehold.it/300x300?text=Variable N%206">
+    </div>
+  </section>
+
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript">
@@ -149,6 +229,63 @@
         pauseOnFocus: true,
         pauseOnHover: true,
         prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of apples" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+      $(".irregular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: false,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of pineapples');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of pineapples" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of pineapples" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+      $(".irregularAT").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of pineapples');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of pineapples" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of pineapples" tabindex="0" role="button">Previous</button>',
+        rows: 1,
+        variableWidth: false
+      });
+      $(".irregularATNC").slick({
+        dots: true,
+        infinite: true,
+        //slidesToShow: 4,
+        //slidesToScroll: 4,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of pineapples');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of pineapples" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of pineapples" tabindex="0" role="button">Previous</button>',
         rows: 1,
         variableWidth: false
       });
@@ -205,6 +342,25 @@
         pauseOnFocus: true,
         pauseOnHover: true,
         prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of bananas" tabindex="0" role="button">Previous</button>',
+        rows: 1
+      });
+      $(".variableN").slick({
+        dots: true,
+        infinite: true,
+        variableWidth: true,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        accessibility: true,
+        assistiveTechnology: true,
+        customPaging: function(slider, i) {
+          var index = (i+1);
+          return $('<button type="button" data-role="none" role="tab" tabindex="0" />').text('Set ' + index + ' of grapes');
+        },
+        focusOnSelect: true,
+        nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="View next set of grapes" tabindex="0" role="button">Next</button>',
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="View previous set of grapes" tabindex="0" role="button">Previous</button>',
         rows: 1
       });
     });
