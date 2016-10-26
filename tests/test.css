@@ -7,6 +7,13 @@
       padding-bottom: 200px;
     }
 
+    h1 {
+      text-align: center;
+      font-size: 1em;
+      font-family: sans-serif;
+      margin: 20px 0;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -35,7 +42,6 @@
       text-align: center;
       padding-top: 50px;
       border-top: 1px solid;
-      margin-top: 100px;
       margin-bottom: 20px;
     }
 
