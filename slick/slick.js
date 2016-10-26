@@ -579,24 +579,78 @@
 
         if ( _.options.assistiveTechnology === true ) {
 
-            _.$slides.each( function(i) {
+            if ( _.options.slidesToScroll === _.options.slidesToShow ) {
 
-                for ( var j = 0; j < _.slideCount; j += _.options.slidesToShow ) {
+                // build groups containing <= slidesToShow
+                _.$slides.each( function(i) {
 
-                    _.$slides.not('.slick-slideGroup, .slick-slideGroupItem').slice(i, i + _.options.slidesToShow)
+                    for ( var j = 0; j < _.slideCount; j += _.options.slidesToShow ) {
+
+                        _.$slides.not('.slick-slideGroup, .slick-slideGroupItem').slice(i, i + _.options.slidesToShow)
+                            .addClass('slick-slideGroupItem')
+                            .wrapAll('<div/>')
+                            .parent()
+                                .addClass('slick-slideGroup')
+                                .attr({
+                                    'role': 'tabpanel',
+                                    'id': 'slick-slideGroup' + (_.instanceUid + '_' + id),
+                                    'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + id)
+                                });
+
+                        id += 1;
+                    }
+                });
+            }
+            else {
+                // for every slide that has a corresponding dot, make the slide a group
+                // for the others (in non-infinite sets), put them in the last group
+
+                var dot_len = ( _.getDotCount() + 1 );
+                var dot_groups = [];
+                var dot_groups_index = -1;
+                var $slides =  _.$slides.not('.slick-slideGroup, .slick-slideGroupItem');
+
+                // sort slides into groups
+                $slides.each( function(i) {
+
+                    if ( i < dot_len) {
+
+                        dot_groups_index ++;
+
+                        // create a new group for every dot
+                        dot_groups[dot_groups_index] = [];
+
+                        // the dot controls this slide id
+                        dot_groups[dot_groups_index].push( i );
+                    }
+                    else {
+                        // the dot also controls this slide id
+                        dot_groups[dot_groups_index].push( i );
+                    }
+                });
+
+                $.each( dot_groups, function(i) {
+
+                    var dot_group = dot_groups[i];
+                    var $slide_group = $();
+
+                    // the members of the group are the slides that the dot controls
+                    $.each( dot_group, function(j, item) {
+                        $slide_group = $slide_group.add( $slides.eq(item) );
+                    });
+
+                    $slide_group
                         .addClass('slick-slideGroupItem')
                         .wrapAll('<div/>')
                         .parent()
                             .addClass('slick-slideGroup')
                             .attr({
                                 'role': 'tabpanel',
-                                'id': 'slick-slideGroup' + (_.instanceUid + '_' + id),
-                                'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + id)
+                                'id': 'slick-slideGroup' + (_.instanceUid + '_' + i),
+                                'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + i)
                             });
-
-                    id += 1;
-                }
-            });
+                });
+            }
         }
     };
 
@@ -2383,6 +2437,17 @@
         }
     };
 
+    Slick.prototype.isInteger = function(value) {
+
+        // http://www.inventpartners.com/javascript_is_int
+        if ( ( parseFloat(value) == parseInt(value) ) && !isNaN(value) ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+
     Slick.prototype.setFocus = function(index) {
 
         var _ = this;
@@ -2391,8 +2456,23 @@
 
             if ( _.$slider.find(':focus').length ) {
 
-                var targetSlide = index;
-                var id = targetSlide / _.options.slidesToShow;
+                var targetSlideIndex = index;
+                var targetGroupIndex = targetSlideIndex / _.options.slidesToShow;
+                var id;
+
+                if ( _.options.slidesToScroll === _.options.slidesToShow ) {
+
+                    if ( _.isInteger( targetGroupIndex ) ) {
+                        id = targetGroupIndex;
+                    }
+                    else {
+                        id = targetSlideIndex;
+                    }
+                }
+                else {
+                    id = targetSlideIndex;
+                }
+
                 var $target = $('#slick-slideGroup' + (_.instanceUid + '_' + id));
                 var y = $(window).scrollTop();
 
