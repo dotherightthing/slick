@@ -2380,8 +2380,14 @@
                 var targetGroupIndex = targetSlideIndex / _.options.slidesToShow;
                 var id;
 
-                if ( _.isInteger( targetGroupIndex ) ) {
-                    id = targetGroupIndex;
+                if ( _.options.slidesToScroll === _.options.slidesToShow ) {
+
+                    if ( _.isInteger( targetGroupIndex ) ) {
+                        id = targetGroupIndex;
+                    }
+                    else {
+                        id = targetSlideIndex;
+                    }
                 }
                 else {
                     id = targetSlideIndex;
