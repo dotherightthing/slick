@@ -567,21 +567,53 @@
                 });
             }
             else {
-                // make every slide a group
-                _.$slides.not('.slick-slideGroup, .slick-slideGroupItem').each( function(i) {
+                // for every slide that has a corresponding dot, make the slide a group
+                // for the others (in non-infinite sets), put them in the last group
 
-                    $(this)
+                var dot_len = ( _.getDotCount() + 1 );
+                var dot_groups = [];
+                var dot_groups_index = -1;
+                var $slides =  _.$slides.not('.slick-slideGroup, .slick-slideGroupItem');
+
+                // sort slides into groups
+                $slides.each( function(i) {
+
+                    if ( i < dot_len) {
+
+                        dot_groups_index ++;
+
+                        // create a new group for every dot
+                        dot_groups[dot_groups_index] = [];
+
+                        // the dot controls this slide id
+                        dot_groups[dot_groups_index].push( i );
+                    }
+                    else {
+                        // the dot also controls this slide id
+                        dot_groups[dot_groups_index].push( i );
+                    }
+                });
+
+                $.each( dot_groups, function(i) {
+
+                    var dot_group = dot_groups[i];
+                    var $slide_group = $();
+
+                    // the members of the group are the slides that the dot controls
+                    $.each( dot_group, function(j, item) {
+                        $slide_group = $slide_group.add( $slides.eq(item) );
+                    });
+
+                    $slide_group
                         .addClass('slick-slideGroupItem')
-                        .wrap('<div/>')
+                        .wrapAll('<div/>')
                         .parent()
                             .addClass('slick-slideGroup')
                             .attr({
                                 'role': 'tabpanel',
-                                'id': 'slick-slideGroup' + (_.instanceUid + '_' + id),
-                                'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + id)
+                                'id': 'slick-slideGroup' + (_.instanceUid + '_' + i),
+                                'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + i)
                             });
-
-                        id += 1;
                 });
             }
         }
