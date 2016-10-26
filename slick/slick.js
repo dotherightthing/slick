@@ -529,7 +529,7 @@
             }
 
             if ( _.options.assistiveTechnology === true ) {
-                _.$dots = dot.prependTo(_.options.appendDots);
+                _.$dots = dot.appendTo(_.options.appendDots);
                 _.$dots.find('li').first().addClass('slick-active');
             }
             else {
