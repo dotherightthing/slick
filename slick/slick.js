@@ -2357,6 +2357,17 @@
         }
     };
 
+    Slick.prototype.isInteger = function(value) {
+
+        // http://www.inventpartners.com/javascript_is_int
+        if ( ( parseFloat(value) == parseInt(value) ) && !isNaN(value) ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+
     Slick.prototype.setFocus = function(index) {
 
         var _ = this;
@@ -2365,8 +2376,17 @@
 
             if ( _.$slider.find(':focus').length ) {
 
-                var targetSlide = index;
-                var id = targetSlide / _.options.slidesToShow;
+                var targetSlideIndex = index;
+                var targetGroupIndex = targetSlideIndex / _.options.slidesToShow;
+                var id;
+
+                if ( _.isInteger( targetGroupIndex ) ) {
+                    id = targetGroupIndex;
+                }
+                else {
+                    id = targetSlideIndex;
+                }
+
                 var $target = $('#slick-slideGroup' + (_.instanceUid + '_' + id));
                 var y = $(window).scrollTop();
 
