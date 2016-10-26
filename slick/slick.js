@@ -544,13 +544,35 @@
 
         if ( _.options.assistiveTechnology === true ) {
 
-            _.$slides.each( function(i) {
+            if ( _.options.slidesToScroll === _.options.slidesToShow ) {
 
-                for ( var j = 0; j < _.slideCount; j += _.options.slidesToShow ) {
+                // build groups containing <= slidesToShow
+                _.$slides.each( function(i) {
 
-                    _.$slides.not('.slick-slideGroup, .slick-slideGroupItem').slice(i, i + _.options.slidesToShow)
+                    for ( var j = 0; j < _.slideCount; j += _.options.slidesToShow ) {
+
+                        _.$slides.not('.slick-slideGroup, .slick-slideGroupItem').slice(i, i + _.options.slidesToShow)
+                            .addClass('slick-slideGroupItem')
+                            .wrapAll('<div/>')
+                            .parent()
+                                .addClass('slick-slideGroup')
+                                .attr({
+                                    'role': 'tabpanel',
+                                    'id': 'slick-slideGroup' + (_.instanceUid + '_' + id),
+                                    'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + id)
+                                });
+
+                        id += 1;
+                    }
+                });
+            }
+            else {
+                // make every slide a group
+                _.$slides.not('.slick-slideGroup, .slick-slideGroupItem').each( function(i) {
+
+                    $(this)
                         .addClass('slick-slideGroupItem')
-                        .wrapAll('<div/>')
+                        .wrap('<div/>')
                         .parent()
                             .addClass('slick-slideGroup')
                             .attr({
@@ -559,9 +581,9 @@
                                 'aria-labelledby': 'slick-navigation' + (_.instanceUid + '_' + id)
                             });
 
-                    id += 1;
-                }
-            });
+                        id += 1;
+                });
+            }
         }
     };
 
