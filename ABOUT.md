@@ -64,17 +64,6 @@ Note: these options are for a slider containing `apples`.
 
 ---
 
-#### default
-
-* The control dots `tablist` follow the slides in the tab order.
-
-#### options.assistiveTechnology (JS)
-
-* The existing `tablist` uses absolute positioning, so its location in the DOM is flexible.
-* `tablist` moved in front of the `tabpanel` elements, so that the user discovers the control dots before the controlled slides.
-
----
-
 #### options.accessibility: `role="presentation"`
 
 * The existing `<li/>` wrappers have a `role` of `presentation`. This removes them from the accessibility tree. As a result their other attributes are being ignored.
